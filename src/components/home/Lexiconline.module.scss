@@ -1,0 +1,250 @@
+$page-green: #57842a;
+$page-dark: #42651e;
+$light-gray: #f4f4f4;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: $light-gray;
+  color: #222;
+}
+
+/* Top green bar and centered circular badge */
+.topBar {
+  position: relative;
+  background: $page-green;
+  height: 56px; /* gendannet tidligere højde */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 120; /* ensure top bar sits above header */
+}
+
+/* circular badge overlapping header */
+.navBadge {
+  position: absolute;
+  top: 34px; /* gendannet tidligere position */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 88px;
+  height: 88px;
+  background: $page-green;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+  z-index: 130; /* mellem .nav (140) og .header (10) */
+}
+
+.badgeIcon {
+  color: #fff;
+  font-size: 28px;
+}
+
+/* Header with background (uses gradient/overlay instead of an image) */
+.header {
+  /* gradient that mimics darkened photo tones from your references */
+  background: linear-gradient(135deg, rgba(24,48,24,0.95) 0%, rgba(72,112,56,0.9) 50%, rgba(36,68,36,0.95) 100%);
+  background-size: cover;
+  background-position: center;
+  padding: 110px 20px 40px;
+  text-align: center;
+  position: relative;
+  margin-top: -12px; /* mindsk overlap så navbar ikke kommer under billedet */
+  z-index: 10; /* kept low */
+  color: #fff;
+}
+
+/* subtle decorative overlay (adds depth similar to photo) */
+.header::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.18), rgba(0,0,0,0.28));
+  pointer-events: none;
+  border-radius: 0;
+  z-index: 11; /* stay below topBar/navBadge but above header background if needed */
+}
+
+/* big script title */
+.title {
+  font-family: 'Marck Script', cursive;
+  font-size: 64px;
+  color: #fff;
+  text-shadow: 0 6px 16px rgba(0,0,0,0.6);
+  margin: 8px 0 16px;
+}
+
+/* Search card overlapping header with rounded top edges like image */
+.searchBox {
+  background: #fafafa;
+  margin: 0 auto;
+  max-width: 760px;
+  border-radius: 8px;
+  padding: 22px 24px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+  transform: translateY(36px); /* flyt søgekortet lidt ned i forhold til badge/header */
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+}
+
+.searchPrompt {
+  display: none; /* not used in this variant */
+}
+
+/* Input row with left rounded input and right pill button */
+.searchRow {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  border-radius: 28px;
+  overflow: hidden;
+  border: 2px solid rgba(87,132,42,0.15);
+}
+.searchInput {
+  flex: 1;
+  padding: 0 22px;
+  border: none;
+  font-size: 16px;
+  outline: none;
+  background: transparent;
+}
+.searchBtn {
+  background: $page-green;
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* Main container */
+.container {
+  flex: 1;
+  padding: 40px 20px 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Large white content card similar to images */
+.card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 28px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+/* Word header and audio icon */
+.wordHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+.wordLeft {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.audioBtn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.word {
+  color: $page-green;
+  font-size: 34px;
+  margin: 0;
+}
+.phonetic { color: #666; }
+
+/* Meanings spacing */
+.meaning { border-top: 1px solid #efefef; padding-top: 16px; margin-top: 16px; }
+.partOfSpeech { color: $page-dark; font-weight: 700; margin-bottom: 10px; }
+.defList { margin: 8px 0 0 18px; }
+.definition { margin-bottom: 12px; color: #333; line-height: 1.5; }
+.example { font-style: italic; color: #555; }
+.synonyms { margin-top: 10px; color: #444; }
+
+/* placeholder / error */
+.placeholder { text-align: center; color: #666; padding: 40px; }
+.error { color: crimson; text-align: center; margin: 12px 0; }
+
+/* Footer with three columns and small badge on right */
+.footer {
+  background: $page-green;
+  color: #fff;
+  padding: 36px 16px;
+  margin-top: 36px;
+}
+.footerCols {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  max-width: 1000px;
+  margin: 0 auto 18px;
+  flex-wrap: wrap;
+}
+.footer a { color: #fff; text-decoration: underline; }
+.footerBrand {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.footerBadge {
+  width: 56px;
+  height: 56px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+}
+.brandText { font-style: italic; opacity: 0.95; }
+
+/* Mobile adjustments */
+@media (max-width: 700px) {
+  .title { font-size: 40px; }
+  .nav { gap: 18px; }
+  .navBadge { width: 64px; height: 64px; top: 30px; }
+  .searchBox { padding: 16px; transform: translateY(18px); }
+  .searchRow { height: 44px; }
+  .word { font-size: 26px; }
+  .container { padding: 20px; }
+  .footerCols { flex-direction: column; gap: 12px; }
+}
+
+.nav {
+  position: relative; /* gør z-index virkningsfuld */
+  z-index: 140;       /* højere end navBadge */
+  display: flex;
+  gap: 36px;
+  align-items: center;
+}
+
+.navItem {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-size: 13px;
+  padding: 0 12px; /* fjern vertikal padding så tekst centreres med min-height */
+  opacity: 0.95;
+  display: inline-flex;
+  align-items: center; /* lodret centreret tekst */
+  justify-content: center;
+  min-height: 56px; /* sikrer nav-item fylder topBar's højde */
+  line-height: 1;
+}

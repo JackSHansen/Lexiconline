@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import Lexiconline from './components/Lexiconline'
-import About from './components/About'
+import Lexiconline from './components/home/Lexiconline'
+import About from './components/about/About'
 
 export default function App() {
 	const getRoute = () => {

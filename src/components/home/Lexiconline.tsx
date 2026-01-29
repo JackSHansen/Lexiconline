@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import styles from './Lexiconline.module.scss'
-import headerImg from '../assets/jaredd-craig-HH4WBGNyltc-unsplash.jpg' // placer dit billede her
+import headerImg from '../../assets/jaredd-craig-HH4WBGNyltc-unsplash.jpg'
 
 type ApiDefinition = {
 	definition: string
@@ -56,7 +56,8 @@ export default function Lexiconline() {
 
 	return (
 		<div className={styles.page}>
-			<header className={styles.header} style={{ backgroundImage: `url(${headerImg})` }}>
+			{/* top green bar with centered circular badge */}
+			<div className={styles.topBar}>
 				<nav className={styles.nav}>
 					<a href="#/" className={styles.navItem}>HOME</a>
 					<a href="#/about" className={styles.navItem}>ABOUT</a>
@@ -69,17 +70,20 @@ export default function Lexiconline() {
 						API
 					</a>
 				</nav>
+				<div className={styles.navBadge}><span className={styles.badgeIcon}>📚</span></div>
+			</div>
 
-				<div className={styles.brand}>
-					<h1 className={styles.title}>Lexiconline</h1>
-				</div>
+			{/* header with background image and script title */}
+			<header className={styles.header} style={{ backgroundImage: `url(${headerImg})` }}>
+				<h1 className={styles.title}>Lexiconline</h1>
 
+				{/* search card overlapping header */}
 				<form className={styles.searchBox} onSubmit={handleSearch}>
-					<label className={styles.searchLabel}>Enter a word to search for</label>
+					<div className={styles.searchPrompt}>Enter a word to search for</div>
 					<div className={styles.searchRow}>
 						<input
 							className={styles.searchInput}
-							placeholder="Enter word..."
+							placeholder="Farmer"
 							value={query}
 							onChange={(e) => setQuery(e.target.value)}
 						/>
@@ -111,6 +115,7 @@ export default function Lexiconline() {
 							{result.phonetics?.[0]?.text && <div className={styles.phonetic}>{result.phonetics[0].text}</div>}
 						</header>
 
+						{/* meanings formatted into full-width sections similar to image */}
 						{result.meanings.map((m, i) => (
 							<section key={i} className={styles.meaning}>
 								<h3 className={styles.partOfSpeech}>{m.partOfSpeech}</h3>
@@ -137,9 +142,29 @@ export default function Lexiconline() {
 				)}
 			</main>
 
+			{/* footer with three columns and small badge on right like image */}
 			<footer className={styles.footer}>
-				<div>Address: Somestreet 232, Luxemburg</div>
-				<div>Contact: somemail@mail.com</div>
+				<div className={styles.footerCols}>
+					<div>
+						<strong>Address:</strong>
+						<div>Somestreet 232</div>
+						<div>Luxemburg</div>
+					</div>
+					<div>
+						<strong>Contact:</strong>
+						<div>Email: somemail@mail.com</div>
+						<div>Phone: 44332343</div>
+					</div>
+					<div>
+						<strong>With special thanks to</strong>
+						<div><a href="https://dictionaryapi.dev/">https://dictionaryapi.dev/</a></div>
+						<div>For the awesome API</div>
+					</div>
+				</div>
+				<div className={styles.footerBrand}>
+					<div className={styles.footerBadge}>📚</div>
+					<div className={styles.brandText}>Lexiconline</div>
+				</div>
 			</footer>
 		</div>
 	)
