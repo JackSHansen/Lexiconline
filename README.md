@@ -1,73 +1,63 @@
-# React + TypeScript + Vite
+# Lexiconline
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Kort beskrivelse
+Lexiconline er en simpel React-app der fungerer som et online-ordbogsinterface. Appen bruger DictionaryAPI (https://dictionaryapi.dev/) til at hente definitioner, eksempler, synonymer og udtale for søgte engelske ord.
 
-Currently, two official plugins are available:
+Funktioner
+- Søg på engelske ord og vis definitioner, eksempler og synonymer.
+- Afspil udtale (hvis lyd findes i API).
+- Enkel hash-baset navigation (Home / About).
+- Responsivt layout med header, søgefelt og footer.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Krav
+- Node.js (anbefales v16+)
+- npm eller yarn
 
-## React Compiler
+Installation (lokalt)
+1. Klon repo og skift til projektmappen:
+   - git clone <repo-url>
+   - cd Lexiconline
+2. Installer afhængigheder:
+   - npm install
+   eller
+   - yarn
+3. Start udviklingsserver:
+   - npm run dev
+   eller
+   - yarn dev
+4. Åbn i browser:
+   - http://localhost:5173 (eller port angivet af dev-server)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Byg til produktion
+- npm run build
+- yarn build
 
-## Expanding the ESLint configuration
+Brug
+- Skriv et ord i søgefeltet og tryk "Search".
+- Klik lyd-ikonet for at høre udtalen, hvis tilgængelig.
+- Brug navigationen øverst for at skifte mellem Home og About.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+API
+- Data hentes fra: https://api.dictionaryapi.dev/api/v2/entries/en/{word}
+- Appen forventer en liste med resultater og benytter første element til visning.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Projektstruktur (udvalgte filer)
+- src/
+  - App.tsx — simpel hash-routing mellem Home og About.
+  - main.tsx — React entrypoint.
+  - components/
+    - home/Lexiconline.tsx — hovedkomponent med søge- og resultatlogik.
+    - about/About.tsx — statisk side med information om projektet.
+    - home/Lexiconline.module.scss — styling (SCSS-modul).
+  - assets/ — billeder og statiske ressourcer.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Fejl og edge-cases
+- Tom søgning ignoreres.
+- Fejl fra API viser en kort fejlbesked.
+- Lydafspilning håndteres med catch for at undgå uncaught exceptions.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Licens & credits
+- Data: tak til https://dictionaryapi.dev/ for gratis API.
+- Billeder/ikoner: tjek src/assets og erstat ved behov.
+- Tilpas licens efter eget ønske.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
